@@ -1,0 +1,31 @@
+.uploader-status {
+	font-size: 0.8rem;
+	color: var( --hm-warm-grey );
+	justify-content: space-between;
+}
+.uploader-status p {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+.uploader .uploader-status > .buttons {
+	display: flex;
+	align-items: center;
+}
+.uploader-status .Loading {
+	margin-left: 0;
+	margin-right: 0.5em;
+}
+
+label.uploader--input {
+	margin: 0 0.3em 0;
+	cursor: pointer;
+}
+.uploader--input:hover {
+	/*text-decoration: underline;*/
+}
+.uploader--input > input[type=file] {
+	display: none;
+}
+.uploader--input .btn {
+	margin-bottom: 0;
+}

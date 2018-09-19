@@ -1,0 +1,10 @@
+.sidebar-optionlist {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.sidebar-optionlist > li {
+	margin: 0;
+	padding: 0;
+}

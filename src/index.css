@@ -1,0 +1,49 @@
+@import url('https://rsms.me/inter/inter-ui.css');
+
+:root {
+	--color-primary: rgba(245, 110, 40, 1);
+	--color-primary-10: rgba(245, 110, 40, 0.1);
+	--color-primary-20: rgba(245, 110, 40, 0.2);
+	--color-accent: rgba(48, 188, 237, 1);
+	--color-accent-05: rgba(48, 188, 237, 0.05);
+	--color-accent-10: rgba(48, 188, 237, 0.1);
+	--color-accent-20: rgba(48, 188, 237, 0.2);
+	--color-grey: rgba(48, 48, 54, 1);
+	--color-grey-05: rgba(48, 48, 54, 0.05);
+	--color-grey-10: rgba(48, 48, 54, 0.1);
+	--color-grey-50: rgba(48, 48, 54, 0.5);
+	--color-white: rgba(255, 250, 255, 1);
+	--color-white-10: rgba(255, 250, 255, 0.1);
+	--color-white-80: rgba(255, 250, 255, 0.8);
+	--color-black: rgba(5, 4, 1, 1);
+}
+
+*, *:before, *:after {
+	box-sizing: border-box;
+}
+
+html, body, #root {
+	height: 100%;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	font: 16px/1.7 'Inter UI', sans-serif;
+	background: var( --color-primary-10 );
+}
+
+label {
+	display: block;
+	margin: 0 0 1em;
+}
+label > span {
+	display: block;
+	font-weight: 500;
+}
+label > span + input,
+label > span + textarea {
+	display: block;
+	font: inherit;
+	width: 100%;
+}

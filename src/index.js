@@ -28,7 +28,7 @@ const store = createStore(
 const render = App => ReactDOM.render(
 	<Provider store={ store }>
 		<IntlProvider locale="en">
-			<Router>
+			<Router basename={ process.env.PUBLIC_URL }>
 				<App
 					appId={ APP_ID }
 					centralUrl={ CENTRAL_URL }

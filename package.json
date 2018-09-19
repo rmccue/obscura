@@ -5,6 +5,7 @@
   "devDependencies": {
     "react-scripts": "1.1.5"
   },
+  "homepage": "https://make.hmn.md/pressograph/",
   "dependencies": {
     "@humanmade/repress": "^0.4.3",
     "luxon": "^1.3.3",

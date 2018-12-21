@@ -86,7 +86,7 @@ class App extends React.Component {
 		const query = queryString.parse( window.location.search );
 
 		// Wipe query parameters.
-		this.props.history.replace('/');
+		this.props.history.replace( this.props.history.basename );
 
 		if ( ! query.code || ! query.brokered_id || ! query.brokered_root || ! query.state ) {
 			this.setState( {

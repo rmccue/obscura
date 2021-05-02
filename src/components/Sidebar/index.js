@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 import DateFilter from './DateFilter';
 import OptionList from './OptionList';
-import Section from './Section';
 import {
 	setDateFilterDuration,
 	setDateFilterRange,

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { HashRouter as Router } from 'react-router-dom';
 import { applyMiddleware, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import thunk from 'redux-thunk';
@@ -13,9 +13,6 @@ import registerServiceWorker from './registerServiceWorker';
 
 import 'react-dates/initialize';
 import './index.css';
-
-const APP_ID = process.env.REACT_APP_CONNECT_ID;
-const CENTRAL_URL = 'https://apps-beta.wp-api.org/broker/2/connect';
 
 const store = createStore(
 	reducers,
@@ -28,15 +25,12 @@ const store = createStore(
 const render = App => ReactDOM.render(
 	<Provider store={ store }>
 		<IntlProvider locale="en">
-			<Router basename={ process.env.PUBLIC_URL }>
-				<App
-					appId={ APP_ID }
-					centralUrl={ CENTRAL_URL }
-				/>
+			<Router>
+				<App />
 			</Router>
 		</IntlProvider>
 	</Provider>,
-	document.getElementById('root')
+	document.getElementById( 'obscura-root' )
 );
 
 render( App );

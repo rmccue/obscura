@@ -1,12 +1,11 @@
 import { handler } from '@humanmade/repress';
 
-// Temporary URL, which will be replaced by the real URL after connecting.
-const DUMMY_URL = '__DUMMY_URL__';
+const root = window.ObscuraVars.api;
 
 const media = new handler( {
 	type: 'media',
-	url: `${ DUMMY_URL }/wp/v2/media`,
-	fetchOptions: {},
+	url: `${ root }wp/v2/media`,
+	nonce: window.ObscuraVars.nonce,
 } );
 media.uploadSingle = ( function ( file ) {
 	return dispatch => {
@@ -38,33 +37,12 @@ media.uploadSingle = ( function ( file ) {
 
 const users = new handler( {
 	type: 'users',
-	url: `${ DUMMY_URL }/wp/v2/users`,
-	fetchOptions: {},
+	url: `${ root }wp/v2/users`,
+	nonce: window.ObscuraVars.nonce,
 } );
 users.registerArchive( 'me', state => ( { include: state.ui.user } ) );
 
-const configureHandlers = data => {
-	[ media, users ].forEach( handler => {
-		handler.url = handler.url.replace( DUMMY_URL, data.url );
-
-		// Repress currently overrides fetchOptions.headers, so we need to
-		// use query instead.
-		// handler.fetchOptions = {
-		// 	...( handler.fetchOptions || {} ),
-		// 	headers: {
-		// 		Authorization: `Bearer ${ data.token }`
-		// 	},
-		// };
-
-		handler.query = {
-			...handler.query,
-			access_token: data.token,
-		};
-	} );
-};
-
 export {
-	configureHandlers,
 	media,
 	users,
 };

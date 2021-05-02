@@ -1,10 +1,19 @@
+import {
+	Button,
+	ClipboardButton,
+	ExternalLink,
+	Panel,
+	PanelBody,
+	PanelRow,
+	TextareaControl,
+	TextControl,
+} from '@wordpress/components';
+import { __ } from '@wordpress/i18n';
+
 import { withSingle } from '@humanmade/repress';
-import React from 'react';
 import { Facebook } from 'react-content-loader';
 import { FormattedDate } from 'react-intl';
 
-import Button from '../Button';
-import TextField from '../Form/TextField';
 import { media } from '../../types';
 
 import './Details.css';
@@ -60,71 +69,91 @@ class Details extends React.Component {
 					/>
 				</div>
 				<div className="details__properties">
-					<ul className="details__inherent">
-						<li>File name: { post.media_details.file && post.media_details.file.split( '/' ).slice( -1 )[0] }</li>
-						<li>File type: { post.mime_type }</li>
-						<li>
-							Uploaded on:
-							{ ' ' }
-							<time
-								dateTime={ post.date_gmt + 'Z' }
-								title={ post.date_gmt + 'Z' }
-							>
-								<FormattedDate value={ post.date_gmt + 'Z' } />
-							</time>
-						</li>
-						<li>Dimensions: { post.media_details.width } × { post.media_details.height }</li>
-					</ul>
+					<Panel>
+						<PanelBody>
+							<ul className="details__inherent">
+								<li>
+									Uploaded on:
+									{ ' ' }
+									<time
+										dateTime={ post.date_gmt + 'Z' }
+										title={ post.date_gmt + 'Z' }
+									>
+										<FormattedDate value={ post.date_gmt + 'Z' } />
+									</time>
+								</li>
+								<li>File name: { post.media_details.file && post.media_details.file.split( '/' ).slice( -1 )[0] }</li>
+								<li>File type: { post.mime_type }</li>
+								<li>Dimensions: { post.media_details.width } × { post.media_details.height } pixels</li>
+							</ul>
+							<div>
+								<TextControl
+									label={ __( 'File URL', 'obscura' ) }
+									readOnly
+									value={ post.source_url }
+								/>
+								<ClipboardButton
+									isSecondary
+									isSmall
+									text={ post.source_url }
+									onCopy={ () => console.log( 'copying' ) }
+									onFinishCopy={ () => console.log( 'copied' ) }
+								>
+									{ __( 'Copy URL to clipboard', 'obscura' ) }
+								</ClipboardButton>
+							</div>
+						</PanelBody>
+					</Panel>
 
-					<form onSubmit={ this.onSubmit }>
-						<ul className="details__post">
-							<li>
-								<label>
-									<span>Title:</span>
-									<TextField
-										disabled={ ! hasEditable }
-										value={ hasEditable ? ( this.state.title || post.title.raw ) : post.title.rendered }
-										onChange={ e => this.setState( { title: e.target.value } ) }
-									/>
-								</label>
-							</li>
-							<li>
-								<label>
-									<span>Alt Text:</span>
-									<TextField
-										disabled={ ! hasEditable }
-										value={ this.state.alt_text || post.alt_text }
-										onChange={ e => this.setState( { alt_text: e.target.value } ) }
-									/>
-								</label>
-							</li>
-							<li>
-								<label>
-									<span>Caption:</span>
-									<TextField
-										disabled={ ! hasEditable }
-										value={ hasEditable ? ( this.state.caption || post.caption.raw ) : post.caption.rendered }
-										onChange={ e => this.setState( { caption: e.target.value } ) }
-									/>
-								</label>
-							</li>
-						</ul>
+					<Panel>
+						<PanelBody>
+							<TextControl
+								disabled={ ! hasEditable }
+								label="Title"
+								value={ hasEditable ? ( this.state.title || post.title.raw ) : post.title.rendered }
+								onChange={ title => this.setState( { title } ) }
+							/>
+							<TextControl
+								className="details__alt-text"
+								disabled={ ! hasEditable }
+								label="Alternative Text"
+								help={ (
+									<>
+										Describe the purpose of the image.
+										Leave empty if the image is purely decorative.
 
-						{ hasEditable ? (
-							<Button
-								disabled={ this.props.saving }
-								submit
-							>
-								{ this.props.saving ? 'Saving…' : 'Save' }
-							</Button>
-						) : (
-							<Button
-								onClick={ () => this.props.onLoad( 'edit' ) }
-							>
-								Edit
-							</Button>
-						) }
-					</form>
+										<ExternalLink href="https://www.w3.org/WAI/tutorials/images/decision-tree">Read more</ExternalLink>
+									</>
+								) }
+								value={ this.state.alt_text || post.alt_text }
+								onChange={ alt_text => this.setState( { alt_text } ) }
+							/>
+							<TextareaControl
+								disabled={ ! hasEditable }
+								label="Caption"
+								value={ hasEditable ? ( this.state.caption || post.caption.raw ) : post.caption.rendered }
+								onChange={ caption => this.setState( { caption } )}
+							/>
+
+							{ hasEditable ? (
+								<Button
+									disabled={ this.props.saving }
+									isBusy={ this.props.saving }
+									isPrimary
+									onClick={ this.onSubmit }
+								>
+									{ this.props.saving ? 'Saving…' : 'Save' }
+								</Button>
+							) : (
+								<Button
+									isPrimary
+									onClick={ () => this.props.onLoad( 'edit' ) }
+								>
+									Edit
+								</Button>
+							) }
+						</PanelBody>
+					</Panel>
 				</div>
 			</div>
 		);

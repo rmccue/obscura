@@ -1,7 +1,6 @@
-import React from 'react';
+import { Button } from '@wordpress/components';
 
 import { SORT_TYPES, VIEW_TYPES } from '../../constants';
-import Button from '../Button';
 
 export default function Header( props ) {
 	const { disabled, sort, view, onChangeSort, onChangeView, onRefresh } = props;
@@ -12,28 +11,36 @@ export default function Header( props ) {
 			onSubmit={ e => { e.preventDefault() } }
 		>
 			<div>
-				<label>
-					<input
-						checked={ view === VIEW_TYPES.GRID }
-						disabled={ disabled }
-						name="view"
-						type="radio"
-						value={ VIEW_TYPES.GRID }
-						onChange={ e => onChangeView( e.target.value ) }
-					/>
-					Grid
-				</label>
-				<label>
-					<input
-						checked={ view === VIEW_TYPES.LIST }
-						disabled={ disabled }
-						name="view"
-						type="radio"
-						value={ VIEW_TYPES.LIST }
-						onChange={ e => onChangeView( e.target.value ) }
-					/>
-					List
-				</label>
+				<div class="view-switch">
+					<label
+						className={ view === VIEW_TYPES.GRID ? 'view-grid current' : 'view-grid' }
+					>
+						<input
+							checked={ view === VIEW_TYPES.GRID }
+							className="screen-reader-text"
+							disabled={ disabled }
+							name="view"
+							type="radio"
+							value={ VIEW_TYPES.GRID }
+							onChange={ e => onChangeView( e.target.value ) }
+						/>
+						<span className="screen-reader-text">Grid</span>
+					</label>
+					<label
+						className={ view === VIEW_TYPES.LIST ? 'view-list current' : 'view-list' }
+					>
+						<input
+							checked={ view === VIEW_TYPES.LIST }
+							className="screen-reader-text"
+							disabled={ disabled }
+							name="view"
+							type="radio"
+							value={ VIEW_TYPES.LIST }
+							onChange={ e => onChangeView( e.target.value ) }
+						/>
+						<span className="screen-reader-text">List</span>
+					</label>
+				</div>
 				<label>
 					Sort by:
 					<select
@@ -54,6 +61,7 @@ export default function Header( props ) {
 			<div>
 				<Button
 					disabled={ disabled }
+					isSecondary
 					onClick={ onRefresh }
 				>
 					Refresh

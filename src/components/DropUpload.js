@@ -41,11 +41,11 @@ export default class DropUpload extends React.PureComponent {
 	}
 
 	render() {
-		const { children } = this.props;
+		const { children, className } = this.props;
 
 		return (
 			<div
-				className={ `dropupload ${ this.state.dropping ? 'dropupload--dropping' : ''}` }
+				className={ `dropupload ${ className || '' } ${ this.state.dropping ? 'dropupload--dropping' : ''}` }
 				onDragOver={ e => this.onDragOver( e ) }
 				onDragLeave={ e => this.onDragLeave( e ) }
 				onDrop={ e => this.onDrop( e ) }

@@ -1,3 +1,6 @@
+.dropupload {
+	flex-grow: 1;
+}
 .dropupload--dropping {
 	outline: 2px dashed var( --color-grey-50 );
 	border-radius: 3px;

@@ -1,5 +1,3 @@
-@import url('https://rsms.me/inter/inter-ui.css');
-
 :root {
 	--color-primary: rgba(245, 110, 40, 1);
 	--color-primary-10: rgba(245, 110, 40, 0.1);
@@ -22,17 +20,6 @@
 	box-sizing: border-box;
 }
 
-html, body, #root {
-	height: 100%;
-}
-
-body {
-	margin: 0;
-	padding: 0;
-	font: 16px/1.7 'Inter UI', sans-serif;
-	background: var( --color-primary-10 );
-}
-
 label {
 	display: block;
 	margin: 0 0 1em;
@@ -46,4 +33,57 @@ label > span + textarea {
 	display: block;
 	font: inherit;
 	width: 100%;
+}
+
+body.toplevel_page_obscura #wpcontent {
+	padding-left: 0;
+}
+
+body.toplevel_page_obscura #wpbody-content {
+	padding-bottom: 0;
+	float: none;
+	height: 100%;
+}
+
+#obscura-root #wp-media-grid {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	min-height: calc(100vh - 32px);
+}
+
+body.toplevel_page_obscura #wpfooter {
+	display: none;
+}
+
+/* To be added to core? */
+.view-switch label {
+	display: block;
+	float: left;
+	width: 28px;
+	height: 28px;
+	text-align: center;
+	line-height: 1.84615384;
+	text-decoration: none;
+}
+
+.view-switch label:before {
+	color: #b4b9be;
+	display: inline-block;
+	font: normal 20px/1 dashicons;
+	speak: never;
+	vertical-align: middle;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.view-switch label:hover:before,
+.view-switch label:focus:before {
+	color: #727272;
+}
+
+.view-switch label.current:before {
+	color: #0073aa;
 }

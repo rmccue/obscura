@@ -1,0 +1,15 @@
+.app__loading,
+.app__load-error {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	text-align: center;
+	font-size: 1.8rem;
+}
+
+.app__loading {
+	color: var( --color-grey-50 );
+}

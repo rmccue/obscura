@@ -1,5 +1,3 @@
-import React from 'react';
-
 import './Uploader.css';
 
 export default function Uploader( props ) {

@@ -1,6 +1,6 @@
 .sidebar {
+	background: #fff;
 	flex-shrink: 0;
 	flex-grow: 0;
-	border-right: 1px solid var( --color-primary-10 );
-	padding: 0 1rem;
+	width: 280px;
 }

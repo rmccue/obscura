@@ -16,6 +16,10 @@
 	margin-right: 0.5em;
 }
 
+.uploader--input.button {
+	vertical-align: initial;
+}
+
 label.uploader--input {
 	margin: 0 0.3em 0;
 	cursor: pointer;

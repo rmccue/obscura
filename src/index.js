@@ -1,3 +1,4 @@
+import { SlotFillProvider } from '@wordpress/components';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { IntlProvider } from 'react-intl';
@@ -24,11 +25,13 @@ const store = createStore(
 
 const render = App => ReactDOM.render(
 	<Provider store={ store }>
-		<IntlProvider locale="en">
-			<Router>
-				<App />
-			</Router>
-		</IntlProvider>
+		<SlotFillProvider>
+			<IntlProvider locale="en">
+				<Router>
+					<App />
+				</Router>
+			</IntlProvider>
+		</SlotFillProvider>
 	</Provider>,
 	document.getElementById( 'obscura-root' )
 );

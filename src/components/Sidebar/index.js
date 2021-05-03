@@ -1,4 +1,4 @@
-import { Panel, PanelBody } from '@wordpress/components';
+import { Panel, PanelBody, Slot } from '@wordpress/components';
 
 import { connect } from 'react-redux';
 
@@ -68,6 +68,9 @@ class Sidebar extends React.Component {
 	render() {
 		return (
 			<Panel className="sidebar">
+				<Slot
+					name="obscura.library.sidebar_top"
+				/>
 				<PanelBody title="Type">
 					<OptionList
 						options={ TYPE_OPTIONS }
@@ -98,6 +101,9 @@ class Sidebar extends React.Component {
 						/>
 					</label>
 				</PanelBody>
+				<Slot
+					name="obscura.library.sidebar_bottom"
+				/>
 			</Panel>
 		);
 	}

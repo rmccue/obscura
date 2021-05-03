@@ -40,6 +40,7 @@
 	width: 35%;
 	margin-top: -1px;
 	background: #fff;
+	box-shadow: 0 0 0 1px #ddd inset;
 }
 
 .details__properties p {

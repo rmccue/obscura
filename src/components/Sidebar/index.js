@@ -67,46 +67,38 @@ class Sidebar extends React.Component {
 
 	render() {
 		return (
-			<div className="sidebar">
-				<Panel header="Type">
-					<PanelBody
-						initialOpen={ false }
-						opened={ true }
-						onToggle={ () => console.log( 'toggl' ) }
-					>
-						<OptionList
-							options={ TYPE_OPTIONS }
-							value={ this.props.type_filter }
-							onChange={ this.props.onChangeTypeFilter }
-						/>
-					</PanelBody>
-				</Panel>
-				<Panel header="Date Range">
-					<PanelBody>
-						<OptionList
-							options={ DATE_RANGE_OPTIONS }
-							value={ this.props.date_filter.type === DATE_FILTER_TYPE.RELATIVE && this.props.date_filter.duration }
-							onChange={ this.props.onChangeDateFilterDuration }
+			<Panel className="sidebar">
+				<PanelBody title="Type">
+					<OptionList
+						options={ TYPE_OPTIONS }
+						value={ this.props.type_filter }
+						onChange={ this.props.onChangeTypeFilter }
+					/>
+				</PanelBody>
+				<PanelBody title="Date Range">
+					<OptionList
+						options={ DATE_RANGE_OPTIONS }
+						value={ this.props.date_filter.type === DATE_FILTER_TYPE.RELATIVE && this.props.date_filter.duration }
+						onChange={ this.props.onChangeDateFilterDuration }
+					/>
+
+					<label>
+						<input
+							checked={ this.props.date_filter.type === DATE_FILTER_TYPE.ABSOLUTE }
+							type="radio"
+							value={ DATE_FILTER_TYPE.ABSOLUTE }
+							onChange={ this.onSelectAbsolute }
 						/>
 
-						<label>
-							<input
-								checked={ this.props.date_filter.type === DATE_FILTER_TYPE.ABSOLUTE }
-								type="radio"
-								value={ DATE_FILTER_TYPE.ABSOLUTE }
-								onChange={ this.onSelectAbsolute }
-							/>
-
-							Custom: <br />
-							<DateFilter
-								ref={ ref => this.dateFilter = ref }
-								value={ this.props.date_filter }
-								onChange={ this.props.onChangeDateFilterRange }
-							/>
-						</label>
-					</PanelBody>
-				</Panel>
-			</div>
+						Custom: <br />
+						<DateFilter
+							ref={ ref => this.dateFilter = ref }
+							value={ this.props.date_filter }
+							onChange={ this.props.onChangeDateFilterRange }
+						/>
+					</label>
+				</PanelBody>
+			</Panel>
 		);
 	}
 }

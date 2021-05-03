@@ -13,7 +13,7 @@ function bootstrap() {
 }
 
 function register_menu_page() {
-	$hook = add_menu_page( 'Obscura', 'Obscura', 'manage_options', 'obscura', __NAMESPACE__ . '\\render_page' );
+	$hook = add_menu_page( 'Obscura', 'Obscura', 'manage_options', 'obscura', __NAMESPACE__ . '\\render_page', 'dashicons-camera', 10 );
 	add_action( 'load-' . $hook, __NAMESPACE__ . '\\load_page' );
 }
 

@@ -865,10 +865,10 @@
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
   integrity sha512-5a6wqoJV/xEdbRNKVo6I4hO3VjyDq//8q2f9I6PBAvMesJHFauXDorcNCsr9RzvsZnaWi5NYCcfyqP1QeFHFbw==
 
-"@humanmade/repress@^0.4.3":
-  version "0.4.3"
-  resolved "https://registry.yarnpkg.com/@humanmade/repress/-/repress-0.4.3.tgz#130e4385ff03c00c2dc3aa71d1dc7c1f692f001a"
-  integrity sha512-Bz9A+rvXFqW0i1OSKK+ItOQWFyVpG9TvYRu+SnMDskXlJrO9CbtDvht9cO/h9ABwOG7VK4yim+pAR+BHY7k9bw==
+"@humanmade/repress@^0.6.0":
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/@humanmade/repress/-/repress-0.6.0.tgz#c426773c93d96ad2eea2dfc0454d231134bdeb73"
+  integrity sha512-WKk3orxjP8QuWDRE4gEa8NWaLl7mkR0zh/meMVpcuPgzinyb25voUA75ci8jwUky8SHLOGcimp74eE2qP3r/Xg==
   dependencies:
     lodash "^4.17.5"
     qs "^6.5.1"

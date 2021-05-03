@@ -2,6 +2,8 @@
 
 An experiment for WordPress media.
 
+<img src="./screenshot.png" />
+
 ## Installing
 
 1. Clone this repo into your plugins directory.

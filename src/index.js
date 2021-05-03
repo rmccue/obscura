@@ -1,6 +1,5 @@
 import { SlotFillProvider } from '@wordpress/components';
-import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from '@wordpress/element';
 import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
 import { HashRouter as Router } from 'react-router-dom';
@@ -10,7 +9,6 @@ import thunk from 'redux-thunk';
 
 import App from './components/App';
 import reducers from './reducers';
-import registerServiceWorker from './registerServiceWorker';
 
 import 'react-dates/initialize';
 import './index.css';
@@ -23,7 +21,7 @@ const store = createStore(
 	)
 );
 
-const render = App => ReactDOM.render(
+const renderApp = App => render(
 	<Provider store={ store }>
 		<SlotFillProvider>
 			<IntlProvider locale="en">
@@ -36,8 +34,7 @@ const render = App => ReactDOM.render(
 	document.getElementById( 'obscura-root' )
 );
 
-render( App );
-registerServiceWorker();
+renderApp( App );
 
 if ( module.hot ) {
 	module.hot.accept( './components/App', () => import( './components/App' ).then( m => {

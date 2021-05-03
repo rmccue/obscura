@@ -1,7 +1,7 @@
 import { withArchive } from '@humanmade/repress';
+import { Component } from '@wordpress/element';
 import * as Luxon from 'luxon';
 import queryString from 'query-string';
-import React from 'react';
 import ContentLoader from 'react-content-loader';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -95,7 +95,7 @@ const LibraryLoader = props => {
 	);
 }
 
-class Library extends React.Component {
+class Library extends Component {
 	constructor( props ) {
 		super( props );
 

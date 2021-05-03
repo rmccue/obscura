@@ -1,8 +1,8 @@
-import React from 'react';
+import { Component } from '@wordpress/element';
 
 import './Dropdown.css';
 
-export default class Dropdown extends React.Component {
+export default class Dropdown extends Component {
 	constructor( props ) {
 		super( props );
 

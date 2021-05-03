@@ -1,5 +1,4 @@
 import moment from 'moment';
-import React from 'react';
 import { DateRangePicker, isInclusivelyBeforeDay } from 'react-dates';
 import { START_DATE } from 'react-dates/constants';
 

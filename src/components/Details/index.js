@@ -8,6 +8,7 @@ import {
 	TextareaControl,
 	TextControl,
 } from '@wordpress/components';
+import { Component } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
 import { withSingle } from '@humanmade/repress';
@@ -18,7 +19,7 @@ import { media } from '../../types';
 
 import './Details.css';
 
-class Details extends React.Component {
+class Details extends Component {
 	constructor( props ) {
 		super( props );
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from '@wordpress/element';
 import { connect } from 'react-redux';
 import { Route, Switch, withRouter } from 'react-router-dom';
 
@@ -11,7 +11,7 @@ import { media } from '../types';
 
 import './App.css';
 
-class Main extends React.Component {
+class Main extends Component {
 	constructor( props ) {
 		super( props );
 

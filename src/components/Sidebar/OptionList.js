@@ -1,5 +1,3 @@
-import React from 'react';
-
 import './OptionList.css';
 
 const Option = props => {

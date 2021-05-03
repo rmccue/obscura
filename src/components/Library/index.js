@@ -1,5 +1,5 @@
-import { withArchive } from '@humanmade/repress';
-import { Component } from '@wordpress/element';
+import { useArchive } from '@humanmade/repress';
+import { useState } from '@wordpress/element';
 import * as Luxon from 'luxon';
 import queryString from 'query-string';
 import ContentLoader from 'react-content-loader';
@@ -95,100 +95,92 @@ const LibraryLoader = props => {
 	);
 }
 
-class Library extends Component {
-	constructor( props ) {
-		super( props );
+export function Library( props ) {
+	const [ width, setWidth ] = useState( 820 );
 
-		this.state = {
-			width: 820,
-		};
-	}
-
-	onReceiveRef = el => {
+	const onReceiveRef = el => {
 		if ( ! el ) {
 			return;
 		}
 
-		this.setState( {
-			width: el.clientWidth,
-		} );
+		setWidth( el.clientWidth );
 	}
 
-	onSubmit = e => {
-		e.preventDefault();
-	}
+	const archiveId = () => {
+		const args = buildMediaQuery( props );
+		const id = 'index?' + queryString.stringify( args );
+		media.registerArchive( id, args );
+		return id;
+	};
 
-	onRefresh = () => {
-		console.log( 'refresh' );
-		console.log( this.props );
-		this.props.onLoad();
-	}
+	const { load, loading, posts } = useArchive(
+		media,
+		state => state.media,
+		archiveId()
+	);
+	const { sort, view } = props;
 
-	render() {
-		const { loading, posts, sort, view } = this.props;
-
-		if ( loading ) {
-			return (
-				<div
-					className="library library--grid"
-					ref={ this.onReceiveRef }
-				>
-					<Header
-						disabled={ true }
-						sort={ sort }
-						view={ view }
-					/>
-
-					<LibraryLoader
-						width={ this.state.width }
-					/>
-				</div>
-			);
-		}
-
-		if ( ! posts ) {
-			return (
-				<div
-					className="library"
-					ref={ this.onReceiveRef }
-				>
-					<p>Unable to load media.</p>
-				</div>
-			);
-		}
-
-		const classes = [
-			'library',
-			view === VIEW_TYPES.GRID ? 'library--grid' : 'library--list',
-		];
+	if ( loading ) {
 		return (
 			<div
-				className={ classes.join( ' ' ) }
-				ref={ this.onReceiveRef }
+				className="library library--grid"
+				ref={ onReceiveRef }
 			>
 				<Header
+					disabled={ true }
 					sort={ sort }
 					view={ view }
-					onChangeView={ view => this.props.onSetView( view ) }
-					onChangeSort={ this.props.onSetSort }
-					onRefresh={ this.onRefresh }
 				/>
 
-				<ul className="library__item-list">
-					{ posts.map( post => (
-						<ListItem
-							key={ post.id }
-							data={ post }
-							view={ view }
-						/>
-					) ) }
-					{ posts.length === 0 ? (
-						<li className="library__no-results">No results</li>
-					) : null }
-				</ul>
+				<LibraryLoader
+					width={ width }
+				/>
 			</div>
 		);
 	}
+
+	if ( ! posts ) {
+		return (
+			<div
+				className="library"
+				ref={ onReceiveRef }
+			>
+				<p>Unable to load media.</p>
+			</div>
+		);
+	}
+
+	const classes = [
+		'library',
+		view === VIEW_TYPES.GRID ? 'library--grid' : 'library--list',
+	];
+	return (
+		<div
+			className={ classes.join( ' ' ) }
+			ref={ onReceiveRef }
+		>
+			<Header
+				sort={ sort }
+				view={ view }
+				onChangeView={ view => props.onSetView( view ) }
+				onChangeSort={ props.onSetSort }
+				onRefresh={ load }
+			/>
+
+			<ul className="library__item-list">
+				{ posts.map( post => (
+					<ListItem
+						key={ post.id }
+						data={ post }
+						view={ view }
+					/>
+				) ) }
+				{ posts.length === 0 ? (
+					<li className="library__no-results">No results</li>
+				) : null }
+			</ul>
+		</div>
+	);
 }
 
 const mapStateToProps = state => ( {
@@ -202,16 +194,4 @@ const mapDispatchToProps = dispatch => ( {
 	onSetView: view => dispatch( setLibraryView( view ) ),
 } );
 
-export default compose(
-	connect( mapStateToProps, mapDispatchToProps ),
-	withArchive(
-		media,
-		state => state.media,
-		props => {
-			const args = buildMediaQuery( props );
-			const id = 'index?' + queryString.stringify( args );
-			media.registerArchive( id, args );
-			return id;
-		}
-	),
-)( Library );
+export default connect( mapStateToProps, mapDispatchToProps )( Library );

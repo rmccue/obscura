@@ -1,10 +1,9 @@
 import { useArchive } from '@humanmade/repress';
 import { useState } from '@wordpress/element';
+import { addQueryArgs } from '@wordpress/url';
 import * as Luxon from 'luxon';
-import queryString from 'query-string';
 import ContentLoader from 'react-content-loader';
 import { connect } from 'react-redux';
-import { compose } from 'redux';
 
 import Header from './Header';
 import ListItem from './ListItem';
@@ -108,7 +107,7 @@ export function Library( props ) {
 
 	const archiveId = () => {
 		const args = buildMediaQuery( props );
-		const id = 'index?' + queryString.stringify( args );
+		const id = addQueryArgs( 'index', args );
 		media.registerArchive( id, args );
 		return id;
 	};

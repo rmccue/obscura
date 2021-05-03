@@ -33,7 +33,7 @@ function load_page() {
 		'wp-components',
 		'wp-date',
 		'wp-element',
-		// 'wp-url',
+		'wp-url',
 	];
 	wp_enqueue_script( SCRIPT_ID, $script_url, $deps, false, true );
 	wp_localize_script( SCRIPT_ID, 'ObscuraVars', [

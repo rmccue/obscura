@@ -39,6 +39,6 @@ renderApp( App );
 if ( module.hot ) {
 	module.hot.accept( './components/App', () => import( './components/App' ).then( m => {
 		const App = m.default;
-		render( App )
+		renderApp( App )
 	} ) );
 }

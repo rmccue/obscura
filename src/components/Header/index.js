@@ -9,7 +9,8 @@ export default function Header( props ) {
 		<header className="header">
 			<div className="header__primary">
 				<h1>Media</h1>
-
+			</div>
+			<div className="header__secondary">
 				<Switch>
 					<Route exact path="/">
 						<Uploader

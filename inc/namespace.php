@@ -33,12 +33,17 @@ function load_page() {
 		'wp-components',
 		'wp-date',
 		'wp-element',
+		'wp-plugins',
 		'wp-url',
+		'wp-viewport',
 	];
 	wp_enqueue_script( SCRIPT_ID, $script_url, $deps, false, true );
 	wp_localize_script( SCRIPT_ID, 'ObscuraVars', [
 		'api' => rest_url(),
 		'nonce' => wp_create_nonce( 'wp_rest' ),
+		'data' => [
+			'sizes' => get_registered_sizes(),
+		],
 	] );
 
 	$style_deps = [
@@ -49,4 +54,54 @@ function load_page() {
 
 function render_page() {
 	echo '<div id="obscura-root"></div>';
+}
+
+/**
+ * Gets all image sizes as keyed array with width, height and crop values.
+ *
+ * @return array
+ */
+function get_registered_sizes() {
+	global $_wp_additional_image_sizes;
+
+	$sizes = \get_intermediate_image_sizes();
+
+	$labels = apply_filters( 'image_size_names_choose', [
+		'thumbnail' => __( 'Thumbnail' ),
+		'medium' => __( 'Medium' ),
+		'medium_large' => __( 'Medium-Large' ),
+		'large' => __( 'Large' ),
+		'full' => __( 'Full Size' ),
+	] );
+
+	// Extract dimensions and crop setting.
+	$data = [];
+	$data['full'] = [
+		'label' => $labels['full'],
+		'width' => null,
+		'height' => null,
+		'crop' => false,
+		'orientation' => null,
+	];
+	foreach ( $sizes as $size ) {
+		if ( isset( $_wp_additional_image_sizes[ $size ] ) ) {
+			$width = intval( $_wp_additional_image_sizes[ $size ]['width'] );
+			$height = intval( $_wp_additional_image_sizes[ $size ]['height'] );
+			$crop = (bool) $_wp_additional_image_sizes[ $size ]['crop'];
+		} else {
+			$width = intval( get_option( "{$size}_size_w" ) );
+			$height = intval( get_option( "{$size}_size_h" ) );
+			$crop = (bool) get_option( "{$size}_crop" );
+		}
+
+		$data[ $size ] = [
+			'label' => $labels[ $size ] ?? $size,
+			'width' => $width,
+			'height' => $height,
+			'crop' => $crop,
+			'orientation' => $width >= $height ? 'landscape' : 'portrait',
+		];
+	}
+
+	return $data;
 }

@@ -1,24 +1,31 @@
 import {
 	Button,
 	ClipboardButton,
+	ComplementaryAreaHeader,
 	ExternalLink,
 	Panel,
 	PanelBody,
 	TextareaControl,
 	TextControl,
 } from '@wordpress/components';
+import * as Foo from '@wordpress/components';
 import { useState } from '@wordpress/element';
+import { ComplementaryArea } from '@wordpress/interface';
+import * as Interface from '@wordpress/interface';
 import { __ } from '@wordpress/i18n';
 
 import { useSingle } from '@humanmade/repress';
 import { Facebook } from 'react-content-loader';
 import { FormattedDate } from 'react-intl';
 
+import ImageMeta from './ImageMeta';
 import { media } from '../../types';
 
 import './Details.css';
+import Preview from "./Preview";
 
 export function Details( props ) {
+	console.log( ComplementaryAreaHeader, Interface );
 	const [ data, _setData ] = useState( {} );
 	const setData = newData => _setData( { ...data, ...newData } );
 
@@ -53,13 +60,9 @@ export function Details( props ) {
 
 	return (
 		<div className="details">
-			<div className="details__main">
-				<img
-					alt={ post.title.rendered }
-					className="details__image"
-					src={ post.source_url }
-				/>
-			</div>
+			<Preview
+				post={ post }
+			/>
 			<div className="details__properties">
 				<Panel>
 					<PanelBody>
@@ -144,6 +147,14 @@ export function Details( props ) {
 								Edit
 							</Button>
 						) }
+					</PanelBody>
+				</Panel>
+
+				<Panel>
+					<PanelBody>
+						<ImageMeta
+							meta={ post.media_details.image_meta }
+						/>
 					</PanelBody>
 				</Panel>
 			</div>

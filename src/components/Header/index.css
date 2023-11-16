@@ -11,7 +11,13 @@
 .header__primary {
 	flex-grow: 1;
 	display: flex;
-	align-items: baseline;
+	align-items: center;
+}
+
+.header__secondary {
+	flex-shrink: 0;
+	display: flex;
+	align-items: center;
 }
 
 .header .logo {

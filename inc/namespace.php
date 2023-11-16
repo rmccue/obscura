@@ -20,24 +20,9 @@ function register_menu_page() {
 function load_page() {
 	$script_url = plugins_url( 'build/index.js', dirname( __FILE__ ) );
 	$style_url = plugins_url( 'build/index.css', dirname( __FILE__ ) );
-	$manifest = file_get_contents( dirname( __DIR__ ) . '/build/asset-manifest.json' );
-	if ( ! empty( $manifest ) ) {
-		$manifest_data = json_decode( $manifest, true );
-		$script_url = $manifest_data['index.js'];
-		$style_url = null;
-	}
+	$manifest = require_once dirname( __DIR__ ) . '/build/index.asset.php';
 
-	$deps = [
-		// 'moment',
-		// 'wp-api-fetch',
-		'wp-components',
-		'wp-date',
-		'wp-element',
-		'wp-plugins',
-		'wp-url',
-		'wp-viewport',
-	];
-	wp_enqueue_script( SCRIPT_ID, $script_url, $deps, false, true );
+	wp_enqueue_script( SCRIPT_ID, $script_url, $manifest['dependencies'], $manifest['version'], true );
 	wp_localize_script( SCRIPT_ID, 'ObscuraVars', [
 		'api' => rest_url(),
 		'nonce' => wp_create_nonce( 'wp_rest' ),
